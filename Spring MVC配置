@@ -41,3 +41,4 @@
       http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
       <mvc:resources mapping="/resources/**" location="/resources/" />
    </beans>
+ 
