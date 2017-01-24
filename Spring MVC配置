@@ -1,1 +1,43 @@
-
+　1. jar包引入
+　　Spring 2.5.6：spring.jar、spring-webmvc.jar、commons-logging.jar、cglib-nodep-2.1_3.jar
+　　Hibernate 3.6.8：hibernate3.jar、hibernate-jpa-2.0-api-1.0.1.Final.jar、antlr-2.7.6.jar、commons-collections-3.1、dom4j-1.6.1.jar、javassist-3.12.0.GA.jar、jta-1.1.jar、slf4j-api-1.6.1.jar、slf4j-nop-1.6.4.jar、相应数据库的驱动jar包
+  2. Spring  MVC的核心是DispatcherServlet，是Spring MVC的前端控制器。与其他Servlet一样，DispatcherServlet必须在Web应用程序的web.xml文件中进行配置。
+    (1)在应用程序中使用Spring MVC需要在web.xml中包含下面的<servlet>声明：
+     <servlet>
+        <servlet-name>springmvc</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+     </servlet>
+    其中，load-on-startup是可选的，设置load-on-startup后应用程序启动时会加载DispatcherServlet并调用其init方法。默认情况下，DispatcherServlet在加载时会从一个基于Servlet名的XML文件中加载Spring应用上下文。
+    在本例中，servlet的名字为springmvc，DispatcherServler将尝试从springmvc-servlet.xml的文件（位于应用程序WEB-INF目录下）来加载应用上下文。
+    (2)配置init-param
+     <servlet>
+        <servlet-name>springmvc</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <init-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>/WEB-INF/config/simple-config.xml</param-value>
+        </init-param>
+        <load-on-startup>1</load-on-startup>
+     </servlet>
+   3.声明DispatcherServlet处理哪些URL。DispatcherServlet常见的匹配模式包括*.htm、／*或者/app。
+     *.htm隐式表明响应始终是HTML格式（实际上并不会总是这样）。
+     匹配模式为/*时，没有映射特定类型的响应，DispatcherServlet将处理所有的请求。在处理图片或样式表等静态资源时会带来不必要的麻烦。
+     /app模式（或其他类似的模式）将DispatcherServlet处理的内容和其他内容分开，但是在URL中暴露了实现的细节（具体来说，就是/app路径）。为了隐藏/app路径通常需要复杂的URL重写技巧。
+     为了不使用这些有缺陷的servlet匹配模式，可以使用下面的匹配DispatcherServlet：
+     为DispatcherServlet配置URL匹配模式
+     <servlet-mapping>
+      <servlet-name> springmvc </servlet-name>
+      <url-pattern>/<url-pattern>
+     </servlet-mapping>
+    4.配置springmvc-servlet.xml文件
+    <?xml version="1.0" encoding="UTF-8"?>
+      <beans xmlns="http://www.springframework.org/schema/beans"
+      xmlns:xsi=http://www.w3.org/2001/XMLSchema-instance
+      xmlns:mvc="http://www.springframework.org/schema/mvc"
+      xsi:schemaLocation="http://www.springframework.org/schema/mvc
+      http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd
+      http://www.springframework.org/schema/beans
+      http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+      <mvc:resources mapping="/resources/**" location="/resources/" />
+   </beans>
