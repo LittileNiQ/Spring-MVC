@@ -1,0 +1,19 @@
+重要组件：
+1.前端控制器：DispatcherServlet（不需要程序员开发）
+作用：接受请求，响应结果，相当于转发器,中央处理器。
+有了DispatcherServlet，减少了其他组件之间的耦合度。
+2.处理器映射器：HandlerMapping（不需要程序员开发）
+作用：根据请求的url查找Handler。
+3.处理适配器HandlerAdapter。
+作用：按照特定规则(HandlerAdapter要求的规则)去执行HandlerAdapter
+注意：编写Handler时按照HandlerAdapter的要求去做，这样适配器才可以正常去执行Handler.
+4.处理器Handler(需要程序员开发)
+注意：编写Handler时按照HandlerAdapter的要求去做，这样适配器才可以正确执行Handler
+5.视图解析器View resolver（不需要程序员开发）
+作用：进行视图解析，根据逻辑视图名解析真正的试图（view）。
+6.试图：View（需要程序员开发jsp）
+View 是一个接口，实现类支持不同的View类型（jsp,freemarker,pdf....）
+
+
+
+
