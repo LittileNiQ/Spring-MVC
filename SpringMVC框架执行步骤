@@ -1,0 +1,16 @@
+Struts2中的filter就是前端控制器，action是后端控制器
+第一步：发起请求到前端控制器{DispatcherServlet}}。
+第二步：前端控制器请求HandlerMapping查找Handler.
+可以根据xml配置，注解进行查找。
+第三步：处理器映射器向前端控制器返回Handler.
+第四步：前端控制器调用处理器映射器去执行Handler.
+第五步：处理器适配器去执行Handler。
+第六步：Handler执行完成给适配器返回ModleAndView.
+第七步：处理器适配器向前端控制器返回ModleAndView
+ModleAndView是springmvc框架的一个底层对象，包括Modle和view。
+第八步：前端控制器请求视图解析器去进行视图解析。
+根据逻辑视图名解析成真正的试图。
+第九步：视图解析器向前端控制器返回View.
+第十步：前端控制器进行视图渲染。
+视图渲染将模型数据{在ModelAndView对象中}填充到request域。
+第十一步：response前端控制器向用户响应结果。
